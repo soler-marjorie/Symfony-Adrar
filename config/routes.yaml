@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+App_home_hello:
+    path: /hello
+    controller: App\Controller\HomeController::hello
+
+App_accueil_addition:
+    path: /addition
+    controller: App\Controller\AccueilController::addition

@@ -11,7 +11,6 @@ class HomeController{
     }
 
     
-
     #[Route(path:"/hello/{nom}", name:"app_home_hello")]
     public function helloTo($nom):Response {
         return new Response('Bonjour ' . $nom);

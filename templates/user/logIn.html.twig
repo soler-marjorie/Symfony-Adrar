@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    <div
+    class="mx-auto block max-w-md rounded-lg p-12 shadow-4 dark:bg-surface-dark">
+        <form class="bg-white p-8 rounded-lg shadow-md w-96">
+            <h2 class="text-2xl font-bold text-center mb-6">Connexion</h2>
+            
+            <!-- Email -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2" for="email">Email</label>
+                <input type="email" id="email" placeholder="Entrez votre email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            
+            <!-- Mot de passe -->
+            <div class="mb-4">
+                <label class="block text-gray-700 font-medium mb-2" for="password">Mot de passe</label>
+                <input type="password" id="password" placeholder="Entrez votre mot de passe" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500">
+            </div>
+            
+            <!-- Bouton -->
+            <button type="submit" class="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600">Se connecter</button>
+        </form>
+    </div>
+{% endblock %}

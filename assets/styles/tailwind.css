@@ -706,6 +706,11 @@ video {
   display: none;
 }
 
+.size-56 {
+  width: 14rem;
+  height: 14rem;
+}
+
 .h-\[1\.125rem\] {
   height: 1.125rem;
 }
@@ -887,6 +892,14 @@ video {
   padding: 3rem;
 }
 
+.p-32 {
+  padding: 8rem;
+}
+
+.p-48 {
+  padding: 12rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -959,6 +972,11 @@ video {
   line-height: 2rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1005,6 +1023,11 @@ video {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+
+.text-blue-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity, 1));
 }
 
 .opacity-20 {

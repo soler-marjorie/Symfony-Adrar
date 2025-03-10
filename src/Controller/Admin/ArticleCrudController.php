@@ -9,6 +9,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -20,12 +22,12 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id', 'ID')->hideOnForm(),
+            IdField::new('id', 'Id')->hideOnForm(),
             TextField::new('title', 'Titre'),
-            TextField::new('content', 'Description'),
-            DateTimeField::new('createAt', 'Date de création'),
-            TextField::new('author', 'Auteur')->hideOnIndex(),
-            TextField::new('categories', 'Categories')->hideOnIndex(),
+            TextareaField::new('content', 'Contenu')->setMaxLength(30)->setNumOfRows(30),
+            DateTimeField::new('createAt', 'Date de création')->setFormat('dd-mm-YYYY'),        
+            AssociationField::new('author', 'Auteur')->autocomplete()->hideOnIndex(),
+            AssociationField::new('categories', 'Catégories')->autocomplete()->hideOnIndex(),
         ];
     }
     

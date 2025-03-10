@@ -99,4 +99,9 @@ class Account
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }

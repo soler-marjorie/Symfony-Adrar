@@ -7,15 +7,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\AccountRepository;
-use App\Entity\Article;
 use App\Entity\Account;
 use App\Form\AccountType;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\AccountService;
 
 final class UserController extends AbstractController
 { 
     public function __construct(
-        private readonly AccountRepository $accountRepository
+        private readonly AccountRepository $accountRepository,
+        private readonly AccountService $accountService
     ) {}
 
     #[Route('/register', name: 'app_user_register')]
@@ -34,37 +34,36 @@ final class UserController extends AbstractController
     public function showAllAccounts(): Response
     {
         return $this->render('user/accounts.html.twig', [
-            "accounts" => $this->accountRepository->findAll()
+            "accounts" => $this->accountRepository->getAll()
         ]);
     }
 
     #[Route('/account/addAccount', name: 'app_user_addAccount')]
-    public function addAccount(Request $resquest): Response
+    public function addAccount(Request $request): Response
     {
-        return $this->render('account/addAccount.html.twig', [
-            "accounts" => $this->accountRepository->findAll()
-        ]);
-
-        $account = new Account();
-        $form = $this->createForm(AccountType::class, $account);
-        $form->handleRequest($resquest);
+        $user = new Account();
+        $form = $this->createForm(AccountType::class, $user);
+        $form->handleRequest($request);
+        $type = "";
         $msg = "";
-        $status ="";
-        if($form->isSubmitted()){
-            try {
-                $this->em->persist($account);
-                $this->em->flush();
-                $msg = "La catégorie a été ajoutée avec succès";
-                $status = "success";
-            } catch (\Exception $e) {
-                $msg ="La catégorie existe déja";
-                $status = "danger";
-            }
+        //test si le formulaire est submit
+        if($form->isSubmitted() && $form->isValid()) {
+           try{
+            //Appel de la methode save d'AccountService
+                $this->accountService->save($user);
+                $type ="success";
+                $msg = "Le compte à éré ajouté en BDD";
+           }
+           //Capturer les exceptions
+           catch (\Exception $e){
+                $type = "danger";
+                $msg = $e->getMessage();
+           }
+
+            $this->addFlash($type, $msg);
         }
-        $this->addFlash($status, $msg);
-        return $this->render('account/addAccount.html.twig',
-        [
-            'form'=> $form
+        return $this->render('user/addaccount.html.twig',[
+            'formulaire' =>$form
         ]);
     }
 }

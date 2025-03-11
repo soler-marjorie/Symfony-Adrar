@@ -40,4 +40,12 @@ class AccountService{
             throw new \Exception("Impossible de récupérer les données.");
         }
     }
+
+    public function getById(int $id){
+        try{
+            $this->accountRepository->findOneById($id);
+        } catch (\Exception $e) {
+            throw new \Exception("Impossible de récupérer le compte.");
+        }
+    }
 }

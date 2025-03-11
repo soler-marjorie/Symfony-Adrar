@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un compte{% endblock %}
+
+{% block body %}
+<section class="p-8">
+    <h1>Vous êtes sur le compte {{ account.firstname }} {{ account.lastname }}</h1>
+    <p>Votre email : {{ account.email }}</p>
+</section>
+
+{% endblock %}
